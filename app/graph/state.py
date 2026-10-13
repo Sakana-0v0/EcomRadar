@@ -1,8 +1,19 @@
 from typing import TypedDict
 
 
-class GraphState(TypedDict):
+class GraphState(TypedDict, total=False):
+    """EcomRadar 状态机共享状态.
+
+    字段分组:
+    - 输入: urls, task_id
+    - 抓取层: scraped_content, is_degraded, error_messages
+    - 检索层: chunks, context_docs
+    - 报告层: report, quality_score, retry_count
+    - 竞品业务字段 (Phase 3 新增): competitor_matrix, price_history
+    - 状态治理预留 (Phase 5): checkpoint_id
+    """
     urls: list[str]
+    task_id: str
     scraped_content: dict[str, str]
     chunks: list[str]
     context_docs: list[str]
@@ -11,4 +22,8 @@ class GraphState(TypedDict):
     retry_count: int
     is_degraded: bool
     error_messages: list[str]
-    task_id: str  # 新增：任务级隔离标识
+
+    competitor_matrix: list[dict]
+    price_history: dict[str, list[float]]
+    report_period: str
+    report_category: str
