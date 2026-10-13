@@ -1,28 +1,51 @@
-"""RAG 节点 — 只检索（不再写入主 collection）.
+"""RAG Node 升级 - 集成混合检索管道.
 
-架构:
-- knowledge_base: 离线预构建的领域知识（方案 C）
-- task_cache: 任务级临时缓存（可选，本次写入以备后续检索）
+行为:
+1. 从 scraped_content 抽取 query
+2. 用 RetrievalPipeline 检索 KB
+3. 应用 metadata filter (platform / category)
+4. 应用 semantic dedup
+5. 返回 context_docs
 """
 from app.graph.state import GraphState
-from app.services.vector_store import (
-    retrieve_from_knowledge_base,
-    index_to_task_cache,
-    retrieve_from_task_cache,
-)
 from app.core.logging import get_logger
 
 logger = get_logger(__name__)
 
 
-async def rag_node(state: GraphState) -> GraphState:
-    """从知识库检索相关上下文.
+_PIPELINE = None
 
-    行为:
-    1. 写入 task_cache（供后续可能的中间结果查询）
-    2. 从 knowledge_base 检索
-    3. 从 task_cache 检索本任务相关内容
-    4. 合并结果作为 context_docs
+
+def _get_pipeline():
+    """懒加载检索管道 (单例)."""
+    global _PIPELINE
+    if _PIPELINE is None:
+        from app.services.retrieval.bm25_index import BM25Index
+        from app.services.retrieval.retrieval_pipeline import RetrievalPipeline
+        from app.services.embedding import embed_text
+
+        bm25 = BM25Index()
+
+        try:
+            from data.kb_sources.ecom_industry_notes_loader import load_industry_notes
+            docs = load_industry_notes()
+        except Exception:
+            docs = []
+        if docs:
+            bm25.add_documents(docs)
+
+        _PIPELINE = RetrievalPipeline(
+            bm25=bm25,
+            embed_fn=embed_text,
+        )
+    return _PIPELINE
+
+
+async def rag_node(state: GraphState) -> GraphState:
+    """RAG Node v2 - 集成 BM25 + Dense + Rerank + Filter + Dedup.
+
+    输入: chunks (从 scraped_content 抽取的文本块)
+    输出: context_docs (Top-K 检索结果)
     """
     chunks = state.get("chunks", [])
     urls = state.get("urls", [])
@@ -32,40 +55,25 @@ async def rag_node(state: GraphState) -> GraphState:
         logger.info("rag skipped: no chunks", extra={"node": "rag"})
         return {"context_docs": [], "is_degraded": True}
 
+    query = " ".join(chunks[:3])[:500] if chunks else "电商竞品"
+
     try:
-        # 1. 写入 task_cache（任务内可用）
-        await index_to_task_cache(task_id, chunks, source=urls[0] if urls else "")
+        pipeline = _get_pipeline()
+        results = await pipeline.search(query, top_k=5)
 
-        # 2. 从 KB 检索（核心）
-        topic_query = chunks[0][:500]
-        kb_results = await retrieve_from_knowledge_base(topic_query, top_k=5)
-        kb_docs = [r["text"] for r in kb_results]
-
-        # 3. 从 task_cache 检索本任务（提供重复/相关上下文）
-        cache_results = await retrieve_from_task_cache(task_id, topic_query, top_k=3)
-        cache_docs = [r["text"] for r in cache_results]
-
-        # 4. 合并（KB 优先，task_cache 补充）
-        seen = set()
-        merged = []
-        for doc in kb_docs + cache_docs:
-            key = doc[:50]  # 简单去重
-            if key not in seen:
-                seen.add(key)
-                merged.append(doc)
+        context_docs = [r["text"] for r in results if r.get("text")]
 
         logger.info(
             "rag completed",
             extra={
                 "node": "rag",
-                "kb_hits": len(kb_docs),
-                "cache_hits": len(cache_docs),
-                "total_context": len(merged),
+                "hits": len(results),
+                "context_chars": sum(len(d) for d in context_docs),
             },
         )
         return {
-            "context_docs": merged,
-            "is_degraded": len(merged) == 0,
+            "context_docs": context_docs,
+            "is_degraded": len(context_docs) == 0,
         }
     except Exception as e:
         logger.error(
