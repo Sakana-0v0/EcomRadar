@@ -1,12 +1,10 @@
-fastapi>=0.110.0
-uvicorn[standard]>=0.28.0
-pydantic>=2.6.0
-langgraph>=0.0.30
-langchain-core>=0.1.30
-langchain-openai>=0.0.8
-httpx>=0.27.0
-beautifulsoup4>=4.12.0
-qdrant-client>=1.8.0
+# 项目依赖包清单
+langgraph>=0.0.20
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+qdrant-client>=1.7.0
+pydantic>=2.0.0
+pydantic-settings>=2.0.0
+httpx>=0.25.0
 python-dotenv>=1.0.0
-pytest>=8.0.0
-pytest-asyncio>=0.23.0
+sse-starlette>=1.8.0

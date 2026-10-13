@@ -1,0 +1,5 @@
+{"text": "人工智能（Artificial Intelligence，AI）是计算机科学的一个分支。它研究如何让机器具有智能，能够像人一样思考和决策。人工智能的核心目标是让计算机系统能够执行通常需要人类智能才能完成的任务，如视觉感知、语音识别、决策制定和语言翻译。", "source": "wikipedia_ai", "metadata": {"category": "concept", "lang": "zh"}}
+{"text": "机器学习（Machine Learning，ML）是人工智能的核心技术之一。它通过算法和统计模型，使计算机系统能够从数据中学习并改进性能，而无需进行明确的编程。机器学习主要分为监督学习、无监督学习和强化学习三大类。深度学习是机器学习的一个子领域。", "source": "wikipedia_ml", "metadata": {"category": "concept", "lang": "zh"}}
+{"text": "深度学习（Deep Learning）是机器学习的一个分支，它基于人工神经网络。深度学习通过构建多层神经网络，自动学习数据的层次化特征表示。深度学习在图像识别、自然语言处理、语音识别等领域取得了突破性进展。代表性的深度学习模型包括卷积神经网络（CNN）、循环神经网络（RNN）和 Transformer。", "source": "wikipedia_dl", "metadata": {"category": "concept", "lang": "zh"}}
+{"text": "大型语言模型（Large Language Model，LLM）是基于 Transformer 架构的大规模深度学习模型。LLM 通过在海量文本数据上进行预训练，学习语言的统计规律和世界知识。代表性的 LLM 包括 GPT 系列、LLaMA、Claude、通义千问等。LLM 可以执行文本生成、问答、翻译、摘要等多种自然语言处理任务。", "source": "wikipedia_llm", "metadata": {"category": "concept", "lang": "zh"}}
+{"text": "检索增强生成（Retrieval-Augmented Generation，RAG）是一种结合信息检索技术与大型语言模型的架构。RAG 通过从外部知识库检索相关信息，将其作为上下文输入到 LLM，从而提高生成内容的准确性和可靠性。RAG 能有效缓解 LLM 的幻觉问题，并使模型能够利用最新或特定领域的信息。", "source": "wikipedia_rag", "metadata": {"category": "concept", "lang": "zh"}}

@@ -11,3 +11,4 @@ class GraphState(TypedDict):
     retry_count: int
     is_degraded: bool
     error_messages: list[str]
+    task_id: str  # 新增：任务级隔离标识

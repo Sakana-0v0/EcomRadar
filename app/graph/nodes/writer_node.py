@@ -1,34 +1,38 @@
 from app.graph.state import GraphState
+from app.services.llm import generate_report
+from app.core.logging import get_logger
+
+logger = get_logger(__name__)
 
 
 async def writer_node(state: GraphState) -> GraphState:
-    """Generate research report from scraped content and context.
-
-    For demo purposes, this is a mock implementation that creates
-    a simple structured report. In production, this would call an LLM.
-    """
+    """Generate research report from scraped content and context."""
     retry_count = state.get("retry_count", 0)
     scraped = state.get("scraped_content", {})
     context = state.get("context_docs", [])
 
-    content_summary = "".join(scraped.values())[:500]
-    context_summary = "".join(context)[:200]
+    content = "\n".join(scraped.values())
+    context_str = "\n".join(context)
 
-    report = f"""# 研究报告
-
-## 核心要点
-基于 {len(scraped)} 个信息源生成
-
-## 内容摘要
-{content_summary}
-
-## 上下文参考
-{context_summary}
-
----
-*本报告为 Demo 版本（重试次数: {retry_count}）*
-"""
-    return {
-        "report": report,
-        "retry_count": retry_count + 1
-    }
+    try:
+        logger.info(
+            "writer started",
+            extra={"node": "writer", "retry_count": retry_count, "content_len": len(content)},
+        )
+        report = await generate_report(content, context_str, retry_count)
+        logger.info(
+            "writer completed",
+            extra={"node": "writer", "report_len": len(report)},
+        )
+        return {"report": report, "retry_count": retry_count + 1}
+    except Exception as e:
+        logger.error(
+            "writer failed",
+            extra={"node": "writer", "error": str(e)},
+        )
+        return {
+            "report": "",
+            "retry_count": retry_count + 1,
+            "error_messages": state.get("error_messages", []) + [f"Writer error: {str(e)}"],
+            "is_degraded": True,
+        }
