@@ -29,6 +29,15 @@ class Settings(BaseSettings):
     max_urls_per_request: int = 10
     request_timeout: int = 30
 
+    scraper_rate_limit: float = 1.0
+    scraper_retry_times: int = 3
+    scraper_retry_backoff: float = 2.0
+    scraper_max_concurrency: int = 5
+    scraper_request_timeout: float = 5.0
+    jina_reader_url: str = "https://r.jina.ai"
+    robots_respect: bool = True
+    robots_cache_ttl: float = 60.0
+
     @field_validator("llm_api_key")
     def validate_api_key(cls, v):
         if not v:

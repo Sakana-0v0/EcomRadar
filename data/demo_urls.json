@@ -1,0 +1,35 @@
+{
+  "smart_speaker": {
+    "category": "智能音箱",
+    "description": "周报场景演示用 URL",
+    "urls": [
+      "https://item.jd.com/100012345678.html",
+      "https://item.jd.com/100023456789.html",
+      "https://detail.tmall.com/item.htm?id=655000012345",
+      "https://detail.tmall.com/item.htm?id=655023456789",
+      "https://mobile.yangkeduo.com/goods.html?goods_id=123456789"
+    ]
+  },
+  "lipstick": {
+    "category": "美妆口红",
+    "description": "月报场景演示用 URL",
+    "urls": [
+      "https://detail.tmall.com/item.htm?id=655100001234",
+      "https://detail.tmall.com/item.htm?id=655100002345",
+      "https://detail.tmall.com/item.htm?id=655100003456",
+      "https://haohuo.jinritemai.com/views/product/item2?id=987000123",
+      "https://haohuo.jinritemai.com/views/product/item2?id=987000456"
+    ]
+  },
+  "phone_case": {
+    "category": "手机壳",
+    "description": "日榜场景演示用 URL(拼多多为主)",
+    "urls": [
+      "https://mobile.yangkeduo.com/goods.html?goods_id=200000001",
+      "https://mobile.yangkeduo.com/goods.html?goods_id=200000002",
+      "https://mobile.yangkeduo.com/goods.html?goods_id=200000003",
+      "https://haohuo.jinritemai.com/views/product/item2?id=987111001",
+      "https://haohuo.jinritemai.com/views/product/item2?id=987111002"
+    ]
+  }
+}
