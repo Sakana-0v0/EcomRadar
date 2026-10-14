@@ -1,0 +1,597 @@
+{
+  "dataset_name": "ecom_qa_retrieval",
+  "total_items": 50,
+  "metrics": [
+    {
+      "name": "exact_match",
+      "value": 0.0,
+      "count": 50,
+      "metadata": {}
+    },
+    {
+      "name": "f1_score",
+      "value": 0.16140225213669118,
+      "count": 50,
+      "metadata": {}
+    },
+    {
+      "name": "rouge_l",
+      "value": 0.15882160697540085,
+      "count": 50,
+      "metadata": {}
+    },
+    {
+      "name": "latency",
+      "value": 2625.0,
+      "count": 50,
+      "metadata": {
+        "p50": 2625.0,
+        "p95": 2952.999999979511,
+        "mean": 2598.44000000041,
+        "min": 0.0,
+        "max": 3297.000000020489
+      }
+    },
+    {
+      "name": "tool_call_success",
+      "value": 1.0,
+      "count": 50,
+      "metadata": {
+        "errors": 0
+      }
+    }
+  ],
+  "results": [
+    {
+      "item_id": "ecom_001",
+      "query": "小度智能音箱旗舰版的价格是多少?",
+      "expected": "329元",
+      "prediction": "智能音箱是 AI 语音助手载体,主流品牌有小度、天猫精灵、小爱",
+      "em": false,
+      "f1": 0.0,
+      "rouge_l": 0.0,
+      "latency_ms": 3297.000000020489,
+      "error": null
+    },
+    {
+      "item_id": "ecom_002",
+      "query": "天猫精灵IN糖现在卖多少钱?",
+      "expected": "263元",
+      "prediction": "智能音箱是 AI 语音助手载体,主流品牌有小度、天猫精灵、小爱",
+      "em": false,
+      "f1": 0.0,
+      "rouge_l": 0.0,
+      "latency_ms": 2469.000000040978,
+      "error": null
+    },
+    {
+      "item_id": "ecom_003",
+      "query": "小米小爱同学Play的销量如何?",
+      "expected": "3万+",
+      "prediction": "智能音箱是 AI 语音助手载体,主流品牌有小度、天猫精灵、小爱",
+      "em": false,
+      "f1": 0.0,
+      "rouge_l": 0.0,
+      "latency_ms": 2608.9999999385327,
+      "error": null
+    },
+    {
+      "item_id": "ecom_004",
+      "query": "Apple HomePod mini有几个颜色?",
+      "expected": "太空灰、白色、黄色、蓝色",
+      "prediction": "智能音箱是 AI 语音助手载体,主流品牌有小度、天猫精灵、小爱",
+      "em": false,
+      "f1": 0.0,
+      "rouge_l": 0.0,
+      "latency_ms": 2422.000000020489,
+      "error": null
+    },
+    {
+      "item_id": "ecom_005",
+      "query": "拼多多的iPhone 15手机壳卖多少?",
+      "expected": "9.9元",
+      "prediction": "拼多多百亿补贴是平台主推活动,价格低于其他平台 10-30%",
+      "em": false,
+      "f1": 0.0,
+      "rouge_l": 0.0,
+      "latency_ms": 2625.0,
+      "error": null
+    },
+    {
+      "item_id": "ecom_006",
+      "query": "哪家智能音箱的销量最高?",
+      "expected": "天猫精灵8万+",
+      "prediction": "智能音箱是 AI 语音助手载体,主流品牌有小度、天猫精灵、小爱",
+      "em": false,
+      "f1": 0.24,
+      "rouge_l": 0.24,
+      "latency_ms": 2734.99999998603,
+      "error": null
+    },
+    {
+      "item_id": "ecom_007",
+      "query": "智能音箱的续航一般是多久?",
+      "expected": "8-12小时",
+      "prediction": "蓝牙音箱续航 8-12 小时为合格线,IPX7 防水是户外款标配",
+      "em": false,
+      "f1": 0.24999999999999997,
+      "rouge_l": 0.24999999999999997,
+      "latency_ms": 2625.0,
+      "error": null
+    },
+    {
+      "item_id": "ecom_008",
+      "query": "双11是什么时间?",
+      "expected": "11月11日",
+      "prediction": "双 11 是年度最大促销节点,平台 11 月 1 日开始预售,11 月 11 日达到高峰",
+      "em": false,
+      "f1": 0.13333333333333333,
+      "rouge_l": 0.13333333333333333,
+      "latency_ms": 2905.999999959022,
+      "error": null
+    },
+    {
+      "item_id": "ecom_009",
+      "query": "口红价格带分几档?",
+      "expected": "开架50-100元,中端100-300元,高端300元以上",
+      "prediction": "口红价格带分三档:开架 50-100 元,中端 100-300 元,高端 300 元以上",
+      "em": false,
+      "f1": 0.3076923076923077,
+      "rouge_l": 0.3076923076923077,
+      "latency_ms": 2797.000000020489,
+      "error": null
+    },
+    {
+      "item_id": "ecom_010",
+      "query": "DSR是什么?",
+      "expected": "店铺动态评分,含描述相符、服务态度、物流服务",
+      "prediction": "DSR 包含描述相符、服务态度、物流服务三个维度,各维度 ≥4.8 为健康",
+      "em": false,
+      "f1": 0.5405405405405405,
+      "rouge_l": 0.5405405405405405,
+      "latency_ms": 2687.000000034459,
+      "error": null
+    },
+    {
+      "item_id": "ecom_011",
+      "query": "SKU策略怎么分配?",
+      "expected": "引流款、爆款、利润款比例约3:5:2",
+      "prediction": "SKU 策略分引流款、爆款、利润款,合理比例约为 3:5:2",
+      "em": false,
+      "f1": 0.6428571428571428,
+      "rouge_l": 0.6428571428571428,
+      "latency_ms": 2484.99999998603,
+      "error": null
+    },
+    {
+      "item_id": "ecom_012",
+      "query": "拼多多百亿补贴价格优势多少?",
+      "expected": "低于其他平台10-30%",
+      "prediction": "拼多多百亿补贴是平台主推活动,价格低于其他平台 10-30%",
+      "em": false,
+      "f1": 0.4666666666666667,
+      "rouge_l": 0.4666666666666667,
+      "latency_ms": 2452.999999979511,
+      "error": null
+    },
+    {
+      "item_id": "ecom_013",
+      "query": "手机壳哪种材质销量最高?",
+      "expected": "硅胶,占比超60%",
+      "prediction": "手机壳材质分硅胶、塑料、皮革,硅胶销量占比超 60%",
+      "em": false,
+      "f1": 0.38095238095238093,
+      "rouge_l": 0.38095238095238093,
+      "latency_ms": 2672.000000020489,
+      "error": null
+    },
+    {
+      "item_id": "ecom_014",
+      "query": "差评关键词Top3是什么?",
+      "expected": "质量、物流、客服响应",
+      "prediction": "差评关键词 Top 3 是质量、物流、客服响应,占比合计超过 70%",
+      "em": false,
+      "f1": 0.4347826086956522,
+      "rouge_l": 0.4347826086956522,
+      "latency_ms": 2515.00000001397,
+      "error": null
+    },
+    {
+      "item_id": "ecom_015",
+      "query": "618大促分几个阶段?",
+      "expected": "预售期、专场期、高潮期",
+      "prediction": "618 大促分预售期、专场期、高潮期三个阶段,京东是主场",
+      "em": false,
+      "f1": 0.5,
+      "rouge_l": 0.5,
+      "latency_ms": 2875.0,
+      "error": null
+    },
+    {
+      "item_id": "ecom_016",
+      "query": "完美日记的核心价格带是?",
+      "expected": "89-129元",
+      "prediction": "完美日记主打性价比,核心价格带 89-129 元",
+      "em": false,
+      "f1": 0.10526315789473685,
+      "rouge_l": 0.10526315789473685,
+      "latency_ms": 2640.999999945052,
+      "error": null
+    },
+    {
+      "item_id": "ecom_017",
+      "query": "花西子主打什么风格?",
+      "expected": "国潮",
+      "prediction": "花西子主打国潮,核心价格带 199-299 元",
+      "em": false,
+      "f1": 0.14285714285714288,
+      "rouge_l": 0.14285714285714288,
+      "latency_ms": 2500.0,
+      "error": null
+    },
+    {
+      "item_id": "ecom_018",
+      "query": "京东PLUS会员平均优惠多少?",
+      "expected": "5-10%",
+      "prediction": "京东 PLUS 会员可享专属价,平均优惠 5-10%",
+      "em": false,
+      "f1": 0.2666666666666667,
+      "rouge_l": 0.2666666666666667,
+      "latency_ms": 2422.000000020489,
+      "error": null
+    },
+    {
+      "item_id": "ecom_019",
+      "query": "天猫88VIP享几折?",
+      "expected": "95折",
+      "prediction": "天猫 88VIP 享 95 折,跨平台通用",
+      "em": false,
+      "f1": 0.1818181818181818,
+      "rouge_l": 0.1818181818181818,
+      "latency_ms": 2547.000000020489,
+      "error": null
+    },
+    {
+      "item_id": "ecom_020",
+      "query": "短视频带货转化率比图文高几倍?",
+      "expected": "2-3倍",
+      "prediction": "短视频带货转化率比图文高 2-3 倍,完播率是关键指标",
+      "em": false,
+      "f1": 0.08695652173913042,
+      "rouge_l": 0.08695652173913042,
+      "latency_ms": 2577.999999979511,
+      "error": null
+    },
+    {
+      "item_id": "ecom_021",
+      "query": "对比小度和天猫精灵哪个便宜?",
+      "expected": "天猫精灵263元,小度329元,天猫精灵更便宜",
+      "prediction": "智能音箱是 AI 语音助手载体,主流品牌有小度、天猫精灵、小爱",
+      "em": false,
+      "f1": 0.2105263157894737,
+      "rouge_l": 0.2105263157894737,
+      "latency_ms": 2952.999999979511,
+      "error": null
+    },
+    {
+      "item_id": "ecom_022",
+      "query": "苹果HomePod mini和国产音箱的价位差多少?",
+      "expected": "HomePod mini 2299元,国产音箱263-349元,差近2000元",
+      "prediction": "智能音箱是 AI 语音助手载体,主流品牌有小度、天猫精灵、小爱",
+      "em": false,
+      "f1": 0.04878048780487805,
+      "rouge_l": 0.04878048780487805,
+      "latency_ms": 2375.0,
+      "error": null
+    },
+    {
+      "item_id": "ecom_023",
+      "query": "智能音箱市场有几个主要品牌?",
+      "expected": "小度、天猫精灵、小爱、HomePod等",
+      "prediction": "智能音箱是 AI 语音助手载体,主流品牌有小度、天猫精灵、小爱",
+      "em": false,
+      "f1": 0.3125,
+      "rouge_l": 0.3125,
+      "latency_ms": 2719.000000040978,
+      "error": null
+    },
+    {
+      "item_id": "ecom_024",
+      "query": "本竞品矩阵表格能帮我列一下吗?",
+      "expected": "需要执行完整pipeline生成",
+      "prediction": "智能音箱是 AI 语音助手载体,主流品牌有小度、天猫精灵、小爱",
+      "em": false,
+      "f1": 0.0,
+      "rouge_l": 0.0,
+      "latency_ms": 2717.9999999934807,
+      "error": null
+    },
+    {
+      "item_id": "ecom_025",
+      "query": "口红怎么分类?",
+      "expected": "按价格分:开架、中端、高端;按质地分:哑光、滋润、丝绒",
+      "prediction": "口红价格带分三档:开架 50-100 元,中端 100-300 元,高端 300 元以上",
+      "em": false,
+      "f1": 0.2580645161290323,
+      "rouge_l": 0.2580645161290323,
+      "latency_ms": 2625.0,
+      "error": null
+    },
+    {
+      "item_id": "ecom_026",
+      "query": "蓝牙音箱户外款需要什么配置?",
+      "expected": "IPX7防水,8-12小时续航",
+      "prediction": "蓝牙音箱续航 8-12 小时为合格线,IPX7 防水是户外款标配",
+      "em": false,
+      "f1": 0.3225806451612903,
+      "rouge_l": 0.19354838709677416,
+      "latency_ms": 2952.999999979511,
+      "error": null
+    },
+    {
+      "item_id": "ecom_027",
+      "query": "差评对店铺影响多大?",
+      "expected": "影响DSR评分,影响搜索权重,影响转化率",
+      "prediction": "差评关键词 Top 3 是质量、物流、客服响应,占比合计超过 70%",
+      "em": false,
+      "f1": 0.0,
+      "rouge_l": 0.0,
+      "latency_ms": 2750.0,
+      "error": null
+    },
+    {
+      "item_id": "ecom_028",
+      "query": "店铺粉丝数重要吗?",
+      "expected": "重要,代表品牌忠诚度和复购潜力",
+      "prediction": "",
+      "em": false,
+      "f1": 0.0,
+      "rouge_l": 0.0,
+      "latency_ms": 0.0,
+      "error": null
+    },
+    {
+      "item_id": "ecom_029",
+      "query": "小度店铺叫什么?",
+      "expected": "小度旗舰店",
+      "prediction": "智能音箱是 AI 语音助手载体,主流品牌有小度、天猫精灵、小爱",
+      "em": false,
+      "f1": 0.08333333333333334,
+      "rouge_l": 0.08333333333333334,
+      "latency_ms": 2563.0000000819564,
+      "error": null
+    },
+    {
+      "item_id": "ecom_030",
+      "query": "天猫精灵官方店是?",
+      "expected": "天猫精灵旗舰店",
+      "prediction": "智能音箱是 AI 语音助手载体,主流品牌有小度、天猫精灵、小爱",
+      "em": false,
+      "f1": 0.23076923076923075,
+      "rouge_l": 0.23076923076923075,
+      "latency_ms": 2640.999999945052,
+      "error": null
+    },
+    {
+      "item_id": "ecom_031",
+      "query": "为什么店铺DSR会下降?",
+      "expected": "近期差评增多、发货慢、客服响应慢等",
+      "prediction": "DSR 包含描述相符、服务态度、物流服务三个维度,各维度 ≥4.8 为健康",
+      "em": false,
+      "f1": 0.0,
+      "rouge_l": 0.0,
+      "latency_ms": 2670.9999999729916,
+      "error": null
+    },
+    {
+      "item_id": "ecom_032",
+      "query": "百亿补贴是哪家平台的活动?",
+      "expected": "拼多多",
+      "prediction": "拼多多百亿补贴是平台主推活动,价格低于其他平台 10-30%",
+      "em": false,
+      "f1": 0.16666666666666669,
+      "rouge_l": 0.16666666666666669,
+      "latency_ms": 2484.99999998603,
+      "error": null
+    },
+    {
+      "item_id": "ecom_033",
+      "query": "618大促主场是哪个平台?",
+      "expected": "京东",
+      "prediction": "618 大促分预售期、专场期、高潮期三个阶段,京东是主场",
+      "em": false,
+      "f1": 0.10526315789473684,
+      "rouge_l": 0.10526315789473684,
+      "latency_ms": 2531.000000075437,
+      "error": null
+    },
+    {
+      "item_id": "ecom_034",
+      "query": "iPhone 15手机壳有几种?",
+      "expected": "iPhone 15、iPhone 14、iPhone 13",
+      "prediction": "手机壳材质分硅胶、塑料、皮革,硅胶销量占比超 60%",
+      "em": false,
+      "f1": 0.0,
+      "rouge_l": 0.0,
+      "latency_ms": 2640.999999945052,
+      "error": null
+    },
+    {
+      "item_id": "ecom_035",
+      "query": "户外便携蓝牙音箱的销量?",
+      "expected": "2万+",
+      "prediction": "蓝牙音箱续航 8-12 小时为合格线,IPX7 防水是户外款标配",
+      "em": false,
+      "f1": 0.0,
+      "rouge_l": 0.0,
+      "latency_ms": 2952.999999979511,
+      "error": null
+    },
+    {
+      "item_id": "ecom_036",
+      "query": "Apple HomePod mini 销量?",
+      "expected": "5千+",
+      "prediction": "手机壳材质分硅胶、塑料、皮革,硅胶销量占比超 60%",
+      "em": false,
+      "f1": 0.0,
+      "rouge_l": 0.0,
+      "latency_ms": 2781.000000075437,
+      "error": null
+    },
+    {
+      "item_id": "ecom_037",
+      "query": "哪些品牌有平价智能音箱?",
+      "expected": "小度、天猫精灵、小爱,价格区间200-400元",
+      "prediction": "智能音箱是 AI 语音助手载体,主流品牌有小度、天猫精灵、小爱",
+      "em": false,
+      "f1": 0.2941176470588235,
+      "rouge_l": 0.2941176470588235,
+      "latency_ms": 2515.999999945052,
+      "error": null
+    },
+    {
+      "item_id": "ecom_038",
+      "query": "如何分析竞品价格趋势?",
+      "expected": "跟踪周报,记录促销节点,分析大促节奏",
+      "prediction": "完美日记主打性价比,核心价格带 89-129 元",
+      "em": false,
+      "f1": 0.0,
+      "rouge_l": 0.0,
+      "latency_ms": 3047.000000020489,
+      "error": null
+    },
+    {
+      "item_id": "ecom_039",
+      "query": "国产智能音箱哪家质量好?",
+      "expected": "小度、天猫精灵、小爱各有特色,DSR均>4.8",
+      "prediction": "智能音箱是 AI 语音助手载体,主流品牌有小度、天猫精灵、小爱",
+      "em": false,
+      "f1": 0.2941176470588235,
+      "rouge_l": 0.2941176470588235,
+      "latency_ms": 2717.9999999934807,
+      "error": null
+    },
+    {
+      "item_id": "ecom_040",
+      "query": "中端口红有什么推荐?",
+      "expected": "完美日记(89-129元)、花西子(199-299元)是中端代表",
+      "prediction": "口红价格带分三档:开架 50-100 元,中端 100-300 元,高端 300 元以上",
+      "em": false,
+      "f1": 0.05555555555555555,
+      "rouge_l": 0.05555555555555555,
+      "latency_ms": 2734.99999998603,
+      "error": null
+    },
+    {
+      "item_id": "ecom_041",
+      "query": "蓝牙连接不稳定怎么办?",
+      "expected": "检查设备配对、距离、重启或更新固件",
+      "prediction": "蓝牙音箱续航 8-12 小时为合格线,IPX7 防水是户外款标配",
+      "em": false,
+      "f1": 0.0,
+      "rouge_l": 0.0,
+      "latency_ms": 2515.00000001397,
+      "error": null
+    },
+    {
+      "item_id": "ecom_042",
+      "query": "国产美妆品牌中哪个主打性价比?",
+      "expected": "完美日记",
+      "prediction": "完美日记主打性价比,核心价格带 89-129 元",
+      "em": false,
+      "f1": 0.33333333333333337,
+      "rouge_l": 0.33333333333333337,
+      "latency_ms": 2469.000000040978,
+      "error": null
+    },
+    {
+      "item_id": "ecom_043",
+      "query": "高端口红代表品牌?",
+      "expected": "YSL等,价格300元以上",
+      "prediction": "口红价格带分三档:开架 50-100 元,中端 100-300 元,高端 300 元以上",
+      "em": false,
+      "f1": 0.20689655172413793,
+      "rouge_l": 0.20689655172413793,
+      "latency_ms": 2562.999999965541,
+      "error": null
+    },
+    {
+      "item_id": "ecom_044",
+      "query": "店铺健康度指标有哪些?",
+      "expected": "DSR三维度、店铺等级、粉丝数、违规记录",
+      "prediction": "DSR 包含描述相符、服务态度、物流服务三个维度,各维度 ≥4.8 为健康",
+      "em": false,
+      "f1": 0.05714285714285715,
+      "rouge_l": 0.05714285714285715,
+      "latency_ms": 2467.9999999934807,
+      "error": null
+    },
+    {
+      "item_id": "ecom_045",
+      "query": "小度智能音箱有几个SKU?",
+      "expected": "白色、黑色、红色",
+      "prediction": "智能音箱是 AI 语音助手载体,主流品牌有小度、天猫精灵、小爱",
+      "em": false,
+      "f1": 0.0,
+      "rouge_l": 0.0,
+      "latency_ms": 2719.000000040978,
+      "error": null
+    },
+    {
+      "item_id": "ecom_046",
+      "query": "如何识别恶意差评?",
+      "expected": "看评价时间集中度、用户历史、是否有刷单特征",
+      "prediction": "差评关键词 Top 3 是质量、物流、客服响应,占比合计超过 70%",
+      "em": false,
+      "f1": 0.0,
+      "rouge_l": 0.0,
+      "latency_ms": 2702.999999979511,
+      "error": null
+    },
+    {
+      "item_id": "ecom_047",
+      "query": "智能音箱未来趋势?",
+      "expected": "多模态交互、AI助手、IoT联动",
+      "prediction": "智能音箱是 AI 语音助手载体,主流品牌有小度、天猫精灵、小爱",
+      "em": false,
+      "f1": 0.12903225806451613,
+      "rouge_l": 0.12903225806451613,
+      "latency_ms": 2655.999999959022,
+      "error": null
+    },
+    {
+      "item_id": "ecom_048",
+      "query": "对比小度和HomePod mini价格",
+      "expected": "小度329元,HomePod mini 2299元,差近7倍",
+      "prediction": "智能音箱是 AI 语音助手载体,主流品牌有小度、天猫精灵、小爱",
+      "em": false,
+      "f1": 0.058823529411764705,
+      "rouge_l": 0.058823529411764705,
+      "latency_ms": 2469.000000040978,
+      "error": null
+    },
+    {
+      "item_id": "ecom_049",
+      "query": "店铺流量下降原因?",
+      "expected": "竞品促销、平台活动变化、搜索权重降低、DSR下降",
+      "prediction": "差评关键词 Top 3 是质量、物流、客服响应,占比合计超过 70%",
+      "em": false,
+      "f1": 0.0,
+      "rouge_l": 0.0,
+      "latency_ms": 2530.999999959022,
+      "error": null
+    },
+    {
+      "item_id": "ecom_050",
+      "query": "智能音箱行业DSR健康标准?",
+      "expected": "三维度均≥4.8",
+      "prediction": "DSR 包含描述相符、服务态度、物流服务三个维度,各维度 ≥4.8 为健康",
+      "em": false,
+      "f1": 0.22222222222222218,
+      "rouge_l": 0.22222222222222218,
+      "latency_ms": 2594.000000040978,
+      "error": null
+    }
+  ],
+  "timestamp": 1791982224.9534976
+}

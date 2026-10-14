@@ -1,0 +1,50 @@
+{"id": "ecom_001", "query": "小度智能音箱旗舰版的价格是多少?", "expected_answer": "329元", "category": "价格查询", "expected_tools": ["scraper"]}
+{"id": "ecom_002", "query": "天猫精灵IN糖现在卖多少钱?", "expected_answer": "263元", "category": "价格查询", "expected_tools": ["scraper"]}
+{"id": "ecom_003", "query": "小米小爱同学Play的销量如何?", "expected_answer": "3万+", "category": "销量查询", "expected_tools": ["scraper"]}
+{"id": "ecom_004", "query": "Apple HomePod mini有几个颜色?", "expected_answer": "太空灰、白色、黄色、蓝色", "category": "SKU查询", "expected_tools": ["scraper"]}
+{"id": "ecom_005", "query": "拼多多的iPhone 15手机壳卖多少?", "expected_answer": "9.9元", "category": "价格查询", "expected_tools": ["scraper"]}
+{"id": "ecom_006", "query": "哪家智能音箱的销量最高?", "expected_answer": "天猫精灵8万+", "category": "销量对比", "expected_tools": ["scraper", "rag"]}
+{"id": "ecom_007", "query": "智能音箱的续航一般是多久?", "expected_answer": "8-12小时", "category": "知识问答", "expected_tools": ["rag"]}
+{"id": "ecom_008", "query": "双11是什么时间?", "expected_answer": "11月11日", "category": "知识问答", "expected_tools": ["rag"]}
+{"id": "ecom_009", "query": "口红价格带分几档?", "expected_answer": "开架50-100元,中端100-300元,高端300元以上", "category": "知识问答", "expected_tools": ["rag"]}
+{"id": "ecom_010", "query": "DSR是什么?", "expected_answer": "店铺动态评分,含描述相符、服务态度、物流服务", "category": "知识问答", "expected_tools": ["rag"]}
+{"id": "ecom_011", "query": "SKU策略怎么分配?", "expected_answer": "引流款、爆款、利润款比例约3:5:2", "category": "知识问答", "expected_tools": ["rag"]}
+{"id": "ecom_012", "query": "拼多多百亿补贴价格优势多少?", "expected_answer": "低于其他平台10-30%", "category": "知识问答", "expected_tools": ["rag"]}
+{"id": "ecom_013", "query": "手机壳哪种材质销量最高?", "expected_answer": "硅胶,占比超60%", "category": "知识问答", "expected_tools": ["rag"]}
+{"id": "ecom_014", "query": "差评关键词Top3是什么?", "expected_answer": "质量、物流、客服响应", "category": "知识问答", "expected_tools": ["rag"]}
+{"id": "ecom_015", "query": "618大促分几个阶段?", "expected_answer": "预售期、专场期、高潮期", "category": "知识问答", "expected_tools": ["rag"]}
+{"id": "ecom_016", "query": "完美日记的核心价格带是?", "expected_answer": "89-129元", "category": "知识问答", "expected_tools": ["rag"]}
+{"id": "ecom_017", "query": "花西子主打什么风格?", "expected_answer": "国潮", "category": "知识问答", "expected_tools": ["rag"]}
+{"id": "ecom_018", "query": "京东PLUS会员平均优惠多少?", "expected_answer": "5-10%", "category": "知识问答", "expected_tools": ["rag"]}
+{"id": "ecom_019", "query": "天猫88VIP享几折?", "expected_answer": "95折", "category": "知识问答", "expected_tools": ["rag"]}
+{"id": "ecom_020", "query": "短视频带货转化率比图文高几倍?", "expected_answer": "2-3倍", "category": "知识问答", "expected_tools": ["rag"]}
+{"id": "ecom_021", "query": "对比小度和天猫精灵哪个便宜?", "expected_answer": "天猫精灵263元,小度329元,天猫精灵更便宜", "category": "多商品对比", "expected_tools": ["scraper"]}
+{"id": "ecom_022", "query": "苹果HomePod mini和国产音箱的价位差多少?", "expected_answer": "HomePod mini 2299元,国产音箱263-349元,差近2000元", "category": "多商品对比", "expected_tools": ["scraper"]}
+{"id": "ecom_023", "query": "智能音箱市场有几个主要品牌?", "expected_answer": "小度、天猫精灵、小爱、HomePod等", "category": "市场分析", "expected_tools": ["rag"]}
+{"id": "ecom_024", "query": "本竞品矩阵表格能帮我列一下吗?", "expected_answer": "需要执行完整pipeline生成", "category": "报告生成", "expected_tools": ["writer"]}
+{"id": "ecom_025", "query": "口红怎么分类?", "expected_answer": "按价格分:开架、中端、高端;按质地分:哑光、滋润、丝绒", "category": "知识问答", "expected_tools": ["rag"]}
+{"id": "ecom_026", "query": "蓝牙音箱户外款需要什么配置?", "expected_answer": "IPX7防水,8-12小时续航", "category": "知识问答", "expected_tools": ["rag"]}
+{"id": "ecom_027", "query": "差评对店铺影响多大?", "expected_answer": "影响DSR评分,影响搜索权重,影响转化率", "category": "知识问答", "expected_tools": ["rag"]}
+{"id": "ecom_028", "query": "店铺粉丝数重要吗?", "expected_answer": "重要,代表品牌忠诚度和复购潜力", "category": "知识问答", "expected_tools": ["rag"]}
+{"id": "ecom_029", "query": "小度店铺叫什么?", "expected_answer": "小度旗舰店", "category": "店铺查询", "expected_tools": ["scraper"]}
+{"id": "ecom_030", "query": "天猫精灵官方店是?", "expected_answer": "天猫精灵旗舰店", "category": "店铺查询", "expected_tools": ["scraper"]}
+{"id": "ecom_031", "query": "为什么店铺DSR会下降?", "expected_answer": "近期差评增多、发货慢、客服响应慢等", "category": "知识问答", "expected_tools": ["rag"]}
+{"id": "ecom_032", "query": "百亿补贴是哪家平台的活动?", "expected_answer": "拼多多", "category": "知识问答", "expected_tools": ["rag"]}
+{"id": "ecom_033", "query": "618大促主场是哪个平台?", "expected_answer": "京东", "category": "知识问答", "expected_tools": ["rag"]}
+{"id": "ecom_034", "query": "iPhone 15手机壳有几种?", "expected_answer": "iPhone 15、iPhone 14、iPhone 13", "category": "SKU查询", "expected_tools": ["scraper"]}
+{"id": "ecom_035", "query": "户外便携蓝牙音箱的销量?", "expected_answer": "2万+", "category": "销量查询", "expected_tools": ["scraper"]}
+{"id": "ecom_036", "query": "Apple HomePod mini 销量?", "expected_answer": "5千+", "category": "销量查询", "expected_tools": ["scraper"]}
+{"id": "ecom_037", "query": "哪些品牌有平价智能音箱?", "expected_answer": "小度、天猫精灵、小爱,价格区间200-400元", "category": "市场分析", "expected_tools": ["rag"]}
+{"id": "ecom_038", "query": "如何分析竞品价格趋势?", "expected_answer": "跟踪周报,记录促销节点,分析大促节奏", "category": "知识问答", "expected_tools": ["rag"]}
+{"id": "ecom_039", "query": "国产智能音箱哪家质量好?", "expected_answer": "小度、天猫精灵、小爱各有特色,DSR均>4.8", "category": "知识问答", "expected_tools": ["rag"]}
+{"id": "ecom_040", "query": "中端口红有什么推荐?", "expected_answer": "完美日记(89-129元)、花西子(199-299元)是中端代表", "category": "商品推荐", "expected_tools": ["rag"]}
+{"id": "ecom_041", "query": "蓝牙连接不稳定怎么办?", "expected_answer": "检查设备配对、距离、重启或更新固件", "category": "知识问答", "expected_tools": ["rag"]}
+{"id": "ecom_042", "query": "国产美妆品牌中哪个主打性价比?", "expected_answer": "完美日记", "category": "知识问答", "expected_tools": ["rag"]}
+{"id": "ecom_043", "query": "高端口红代表品牌?", "expected_answer": "YSL等,价格300元以上", "category": "知识问答", "expected_tools": ["rag"]}
+{"id": "ecom_044", "query": "店铺健康度指标有哪些?", "expected_answer": "DSR三维度、店铺等级、粉丝数、违规记录", "category": "知识问答", "expected_tools": ["rag"]}
+{"id": "ecom_045", "query": "小度智能音箱有几个SKU?", "expected_answer": "白色、黑色、红色", "category": "SKU查询", "expected_tools": ["scraper"]}
+{"id": "ecom_046", "query": "如何识别恶意差评?", "expected_answer": "看评价时间集中度、用户历史、是否有刷单特征", "category": "知识问答", "expected_tools": ["rag"]}
+{"id": "ecom_047", "query": "智能音箱未来趋势?", "expected_answer": "多模态交互、AI助手、IoT联动", "category": "市场分析", "expected_tools": ["rag"]}
+{"id": "ecom_048", "query": "对比小度和HomePod mini价格", "expected_answer": "小度329元,HomePod mini 2299元,差近7倍", "category": "多商品对比", "expected_tools": ["scraper"]}
+{"id": "ecom_049", "query": "店铺流量下降原因?", "expected_answer": "竞品促销、平台活动变化、搜索权重降低、DSR下降", "category": "知识问答", "expected_tools": ["rag"]}
+{"id": "ecom_050", "query": "智能音箱行业DSR健康标准?", "expected_answer": "三维度均≥4.8", "category": "知识问答", "expected_tools": ["rag"]}
