@@ -33,15 +33,17 @@ def test_should_retry_rewrite():
 
 
 def test_should_retry_end():
+    """质量达标 → 推送到 Publisher."""
     state: GraphState = {
         "urls": [], "scraped_content": {}, "chunks": [],
         "context_docs": [], "report": "", "quality_score": 80,
         "retry_count": 1, "is_degraded": False, "error_messages": []
     }
-    assert should_retry(state) == "end"
+    assert should_retry(state) == "publish"
 
 
 def test_should_retry_max_retries():
+    """重试耗尽 → 强制收敛 end."""
     state: GraphState = {
         "urls": [], "scraped_content": {}, "chunks": [],
         "context_docs": [], "report": "", "quality_score": 60,
@@ -51,9 +53,10 @@ def test_should_retry_max_retries():
 
 
 def test_should_retry_high_quality():
+    """高质量 → 推送到 Publisher."""
     state: GraphState = {
         "urls": [], "scraped_content": {}, "chunks": [],
         "context_docs": [], "report": "", "quality_score": 90,
         "retry_count": 0, "is_degraded": False, "error_messages": []
     }
-    assert should_retry(state) == "end"
+    assert should_retry(state) == "publish"

@@ -3,6 +3,7 @@ from app.graph.nodes.extractor_node import extractor_node
 from app.graph.nodes.rag_node import rag_node
 from app.graph.nodes.writer_node import writer_node
 from app.graph.nodes.evaluator_node import evaluator_node
+from app.graph.nodes.publisher_node import publisher_node
 
 __all__ = [
     "scraper_node",
@@ -10,4 +11,5 @@ __all__ = [
     "rag_node",
     "writer_node",
     "evaluator_node",
+    "publisher_node",
 ]
