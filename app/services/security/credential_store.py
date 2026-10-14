@@ -116,7 +116,12 @@ class InMemoryCredentialStore(CredentialStore):
         return f"{tenant_id}:{provider}"
 
     def _serialize(self, credential: EncryptedCredential) -> _StoredCiphertext:
-        payload = f"{credential.api_key}|{credential.extra}"
+        import json
+        payload = json.dumps(
+            {"api_key": credential.api_key, "extra": credential.extra},
+            ensure_ascii=False,
+            separators=(",", ":"),
+        )
         ciphertext = self._cipher.encrypt(payload)
         return _StoredCiphertext(
             tenant_id=credential.tenant_id,
@@ -127,20 +132,16 @@ class InMemoryCredentialStore(CredentialStore):
         )
 
     def _deserialize(self, raw: _StoredCiphertext) -> EncryptedCredential:
-        plaintext = self._cipher.decrypt(raw.ciphertext)
-        parts = plaintext.split("|", 1)
-        api_key = parts[0]
-        extra_str = parts[1] if len(parts) > 1 else "{}"
         import json
-        try:
-            extra = json.loads(extra_str)
-        except json.JSONDecodeError:
-            extra = {}
+        plaintext = self._cipher.decrypt(raw.ciphertext)
+        data = json.loads(plaintext)
+        if not isinstance(data, dict):
+            data = {"api_key": str(data), "extra": {}}
         return EncryptedCredential(
             tenant_id=raw.tenant_id,
             provider=raw.provider,
-            api_key=api_key,
-            extra=extra,
+            api_key=data.get("api_key", ""),
+            extra=data.get("extra", {}),
             created_at=raw.created_at,
             updated_at=raw.updated_at,
         )
