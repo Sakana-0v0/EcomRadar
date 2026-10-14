@@ -5,15 +5,16 @@ class GraphState(TypedDict, total=False):
     """EcomRadar 状态机共享状态.
 
     字段分组:
-    - 输入: urls, task_id
+    - 输入: urls, task_id, tenant_id (Phase 6 新增)
     - 抓取层: scraped_content, is_degraded, error_messages
     - 检索层: chunks, context_docs
     - 报告层: report, quality_score, retry_count
-    - 竞品业务字段 (Phase 3 新增): competitor_matrix, price_history
-    - 状态治理预留 (Phase 5): checkpoint_id
+    - 竞品业务字段: competitor_matrix, price_history
+    - 多租户 (Phase 6): tenant_id
     """
     urls: list[str]
     task_id: str
+    tenant_id: str
     scraped_content: dict[str, str]
     chunks: list[str]
     context_docs: list[str]

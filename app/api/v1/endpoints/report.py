@@ -4,9 +4,11 @@
 - POST /api/v1/report/generate - 启动报告生成
 - POST /api/v1/report/{task_id}/resume - 审批后恢复
 - GET /api/v1/report/{task_id}/status - 查询状态
+
+Phase 6: 注入 tenant_id (从 TenantMiddleware)
 """
 import uuid
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 from sse_starlette.sse import EventSourceResponse
@@ -37,7 +39,7 @@ class StatusResponse(BaseModel):
 
 
 @router.post("/generate")
-async def generate_report(request: ReportRequest):
+async def generate_report(request: Request, body: ReportRequest):
     """Generate report with SSE streaming.
 
     注意: 当工作流配置 interrupt_before=["publisher"] 时,
@@ -45,12 +47,14 @@ async def generate_report(request: ReportRequest):
     客户端需调用 POST /{task_id}/resume 继续.
     """
     task_id = f"task_{uuid.uuid4().hex[:12]}"
+    tenant_id = getattr(request.state, "tenant_id", "anonymous")
 
     async def event_stream():
         config = {"configurable": {"thread_id": task_id}}
         initial_state: GraphState = {
             "task_id": task_id,
-            "urls": request.urls,
+            "tenant_id": tenant_id,
+            "urls": body.urls,
             "scraped_content": {},
             "chunks": [],
             "context_docs": [],
