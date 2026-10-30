@@ -13,12 +13,14 @@ def _make_request(
     method: str = "GET",
     path: str = "/api/v1/report/generate",
     headers: Optional[dict] = None,
+    query_params: Optional[dict] = None,
 ) -> MagicMock:
     """构造 mock Request 对象."""
     request = MagicMock()
     request.method = method
     request.url.path = path
     request.headers = headers or {}
+    request.query_params = query_params or {}
     request.state = MagicMock()
     return request
 
@@ -101,6 +103,17 @@ class TestTenantMiddleware:
 
         await middleware.dispatch(request, call_next)
         assert request.state.user_id == "u1"
+
+    @pytest.mark.asyncio
+    async def test_tenant_from_query_param(self):
+        """EventSource 场景: tenant_id 通过 query param 传递."""
+        middleware = TenantMiddleware(app=MagicMock(), required=True)
+        request = _make_request(headers={}, query_params={"tenant_id": "tenant_q"})
+        call_next = _make_call_next(_make_response())
+
+        result = await middleware.dispatch(request, call_next)
+        assert result.status_code == 200
+        assert request.state.tenant_id == "tenant_q"
 
 
 class TestRateLimitMiddleware:

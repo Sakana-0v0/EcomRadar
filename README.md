@@ -1,10 +1,27 @@
 # EcomRadar
 
-> 多智能体电商竞品监控研报系统 · LangGraph · MCP · Qdrant
+> 多智能体电商竞品监控研报系统 · LangGraph · MCP · Qdrant · React
 
 从竞品商品 URL 输入到结构化研报交付的端到端自动化流水线,内置质量门控、断点续跑、混合检索、多渠道推送。
 
-**项目状态**: 🚧 Phase 9 / 9(88.9%)| **测试**: 388 passed(100%)| **Commit**: `bd87157`
+**项目状态**: 🚧 Phase 10 / 10(90%)| **测试**: 389 后端 + 38 前端 = **427 passed**(100%)| **Commit**: `7738ab2`
+
+---
+
+## 🌐 在线预览
+
+启动后访问 **http://localhost:8000** 即可看到 Dashboard:
+
+| 模块 | 展示内容 |
+|------|----------|
+| **Agent 状态机流转** | 6 节点实时动画(pulse-ring + flow-dash),含 Evaluator 重试标注 |
+| **质量评分雷达图** | 5 维度 SVG 雷达图 + 权重进度条 + 75 分门控状态 |
+| **竞品周报预览** | Markdown 渲染(表格/列表/行内格式),支持「渲染 / 源码」切换 |
+| **HITL 审批** | 流程暂停时显示审批条,「批准并发布 / 驳回」实时调用 `/resume` |
+| **降级链路** | direct → jina → mock 三级链路可视化 + robots/限流合规提示 |
+| **多租户切换** | 4 个租户下拉,切换后触发独立凭证与独立限流配额 |
+| **量化指标** | Recall@5 / Tool Call / Latency 等 6 项 Benchmark 数据 |
+| **事件流** | 实时 SSE 事件日志(按 kind 着色) |
 
 ---
 
@@ -19,6 +36,7 @@
 | **多租户** | AES-256 凭证 + Sliding Window 限流 | Token single-flight |
 | **多渠道推送** | Notion + 飞书双通道 | MCP 协议 |
 | **量化评测** | 50 条 Benchmark + 5 大指标 | Tool Call 100%,P50 2.6s |
+| **可视化 Dashboard** | React 19 + Vite + Tailwind | 7 组件 / 38 测试 |
 
 ---
 
@@ -82,14 +100,27 @@ python -c "import secrets; print(secrets.token_urlsafe(32))"
 
 ### 3. 启动服务
 
-**本地开发**:
-```bash
-uvicorn app.main:app --reload
-```
-
-**Docker Compose**:
+**方式 A: Docker Compose(推荐,含前端)**
 ```bash
 docker-compose up --build
+# 访问 http://localhost:8000
+```
+
+**方式 B: 本地开发(前后端分离)**
+```bash
+# 终端 1 — 后端
+uvicorn app.main:app --reload
+
+# 终端 2 — 前端(代理到后端)
+cd frontend && npm install && npm run dev
+# 访问 http://localhost:5173
+```
+
+**方式 C: 只跑后端(前端需预先构建)**
+```bash
+cd frontend && npm install && npm run build && cd ..
+uvicorn app.main:app --reload
+# 访问 http://localhost:8000
 ```
 
 ### 4. 调用 API
@@ -177,7 +208,15 @@ EcomRadar/
 │   ├── api/v1/endpoints/        # API 路由
 │   │   ├── report.py            # /generate /resume /status
 │   │   └── health.py
-│   └── main.py                  # FastAPI 入口
+│   └── main.py                  # FastAPI 入口 (+ 静态前端挂载)
+├── frontend/                    # React 19 + Vite + Tailwind Dashboard
+│   ├── src/
+│   │   ├── App.jsx              # 主布局 + 状态编排
+│   │   ├── api/client.js        # SSE + REST 客户端
+│   │   ├── components/          # 7 个业务组件
+│   │   └── test/                # 38 个 Vitest 用例
+│   ├── vite.config.js
+│   └── tailwind.config.js
 ├── data/
 │   ├── benchmark/               # 50 条 Benchmark
 │   ├── kb_sources/              # 电商知识库
@@ -192,9 +231,9 @@ EcomRadar/
 │   ├── run_benchmark.py
 │   ├── run_retrieval_benchmark.py
 │   └── setup_credentials.py
-├── tests/                       # 388 个测试
+├── tests/                       # 389 个后端测试
 ├── docker-compose.yml
-├── Dockerfile
+├── Dockerfile                   # 多阶段构建 (node + python)
 ├── requirements.txt
 └── .env.example
 ```
@@ -213,7 +252,8 @@ EcomRadar/
 | Phase 6 | 多租户(Token+限流+加密) | ✅ | +40 |
 | Phase 7 | MCP 多元化输出(Notion+飞书) | ✅ | +26 |
 | Phase 8 | 量化评测体系(50 条 Benchmark) | ✅ | +56 |
-| Phase 9 | 演示材料 + 简历打磨 | 🚧 | — |
+| Phase 9 | 演示材料 + 简历打磨 | ✅ | — |
+| Phase 10 | React Dashboard(7 组件 + SSE 实时可视化) | ✅ | +38 前端 |
 
 详见: [docs/PROJECT_PROGRESS.md](docs/PROJECT_PROGRESS.md)
 
@@ -225,11 +265,20 @@ EcomRadar/
 # 安装依赖
 pip install -r requirements.txt
 
-# 运行测试
+# 运行测试 (389 个)
 pytest tests/ -v
 
 # 运行特定测试
 pytest tests/test_rate_limiter.py -v
+
+# 前端安装 & 构建
+cd frontend && npm install && npm run build
+
+# 前端测试 (38 个)
+cd frontend && npm run test
+
+# 前端 Lint
+cd frontend && npm run lint
 
 # 跑检索 Benchmark
 python -m scripts.run_retrieval_benchmark
@@ -240,10 +289,13 @@ python -m scripts.run_benchmark
 # 配置凭证
 python -m scripts.setup_credentials add notion
 
-# 启动服务
+# 启动后端
 uvicorn app.main:app --reload
 
-# Docker Compose
+# 启动前端 dev server
+cd frontend && npm run dev
+
+# Docker Compose (前后端一体)
 docker-compose up --build
 ```
 
@@ -269,10 +321,12 @@ docker-compose up --build
 ### 工程化
 | 指标 | 数值 |
 |------|------|
-| 测试用例 | 388 |
-| 测试通过率 | 100% |
+| 后端测试用例 | 389 |
+| 前端测试用例 | 38 |
+| 总测试通过率 | 427 / 427(100%) |
 | 服务模块 | 20+ |
 | LangGraph 节点 | 6 |
+| 前端组件 | 7 |
 
 ---
 
@@ -288,6 +342,7 @@ docker-compose up --build
 8. **Token 生命周期管理** — 提前 5 分钟自动刷新 + single-flight
 9. **MCP 双通道推送** — Notion + 飞书,凭证脱敏,降级不中断
 10. **量化评测体系** — 50 条 Benchmark + 5 大指标 + A/B 框架
+11. **实时可视化 Dashboard** — React 19 + SSE,6 节点流转动画 + 评分雷达图 + 交互式审批
 
 详见: [docs/HIGHLIGHTS.md](docs/HIGHLIGHTS.md)
 
@@ -313,12 +368,13 @@ docker-compose up --build
 
 - **AI 框架**: LangGraph · LangChain · Pydantic v2
 - **Web 框架**: FastAPI · SSE 流式
+- **前端**: React 19 · Vite 8 · Tailwind CSS 3 · Vitest
 - **向量数据库**: Qdrant
 - **检索算法**: rank_bm25 (BM25Plus) · BGE-style 多信号 Rerank
 - **异步**: Asyncio · httpx
 - **安全**: cryptography (Fernet AES-128-CBC + HMAC-SHA256)
-- **测试**: pytest · pytest-asyncio
-- **部署**: Docker · Docker Compose
+- **测试**: pytest · pytest-asyncio · Vitest · Testing Library
+- **部署**: Docker (多阶段构建) · Docker Compose
 
 ---
 

@@ -8,6 +8,7 @@
 Phase 6: 注入 tenant_id (从 TenantMiddleware)
 """
 import uuid
+import json
 from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
@@ -39,8 +40,12 @@ class StatusResponse(BaseModel):
 
 
 @router.post("/generate")
-async def generate_report(request: Request, body: ReportRequest):
+async def generate_report(request: Request, body: ReportRequest = None):
     """Generate report with SSE streaming.
+
+    支持两种调用方式:
+    1. POST + JSON body (标准客户端)
+    2. GET + query params (EventSource, 因其不支持自定义 header)
 
     注意: 当工作流配置 interrupt_before=["publisher"] 时,
     流程在 Publisher 节点前暂停, 返回的 SSE 事件含 'paused' 状态.
@@ -49,12 +54,23 @@ async def generate_report(request: Request, body: ReportRequest):
     task_id = f"task_{uuid.uuid4().hex[:12]}"
     tenant_id = getattr(request.state, "tenant_id", "anonymous")
 
+    urls: list[str] = []
+    if body is not None and body.urls:
+        urls = body.urls
+    else:
+        raw = request.query_params.get("urls", "")
+        try:
+            parsed = json.loads(raw)
+            urls = parsed if isinstance(parsed, list) else [str(parsed)]
+        except (json.JSONDecodeError, TypeError):
+            urls = [u for u in raw.split(",") if u]
+
     async def event_stream():
         config = {"configurable": {"thread_id": task_id}}
         initial_state: GraphState = {
             "task_id": task_id,
             "tenant_id": tenant_id,
-            "urls": body.urls,
+            "urls": urls,
             "scraped_content": {},
             "chunks": [],
             "context_docs": [],
@@ -91,6 +107,22 @@ async def generate_report(request: Request, body: ReportRequest):
         yield {"event": "done", "data": task_id}
 
     return EventSourceResponse(event_stream())
+
+
+@router.get("/generate")
+async def generate_report_sse(request: Request):
+    """SSE 专用 GET 端点 (供 EventSource 使用).
+
+    EventSource 无法设置自定义 header, 故 tenant_id 通过 query param 传递.
+    """
+    raw = request.query_params.get("urls", "")
+    try:
+        parsed = json.loads(raw)
+        urls = parsed if isinstance(parsed, list) else [str(parsed)]
+    except (json.JSONDecodeError, TypeError):
+        urls = [u for u in raw.split(",") if u]
+
+    return await generate_report(request, ReportRequest(urls=urls))
 
 
 @router.post("/{task_id}/resume")

@@ -1,10 +1,19 @@
 # 项目依赖包清单
 langgraph>=0.0.20
-fastapi>=0.104.0
+fastapi>=0.115.0
 uvicorn[standard]>=0.24.0
 qdrant-client>=1.7.0
 pydantic>=2.0.0
 pydantic-settings>=2.0.0
 httpx>=0.25.0
 python-dotenv>=1.0.0
-sse-starlette>=1.8.0
+sse-starlette>=2.0.0
+
+# Phase 6: 安全与限流
+cryptography>=41.0.0
+
+# Phase 4: 混合检索
+rank_bm25>=0.2.2
+
+# Phase 10: SSE 前端 Dashboard (可选)
+# 如需启用 /api/v1/report/generate 的 GET SSE 端点

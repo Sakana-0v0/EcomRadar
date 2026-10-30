@@ -1,10 +1,9 @@
 """FastAPI 多租户中间件 + 限流中间件.
 
 TenantMiddleware:
-- 解析 X-Tenant-ID Header
-- 缺失/空 → 拒绝 (400)
+- 解析 X-Tenant-ID Header (SSE EventSource 场景回退到 query param)
+- 缺失/空 -> 拒绝 (400)
 - 注入到 request.state.tenant_id
-- 可选: 解析 X-User-ID 注入
 
 RateLimitMiddleware:
 - 基于 tenant_id 调用 SlidingWindowRateLimiter
@@ -25,6 +24,16 @@ from app.services.security.rate_limiter import (
 )
 
 
+_EXEMPT_PATHS = frozenset({
+    "/",
+    "/api/v1/health",
+    "/api/v1/meta",
+    "/docs",
+    "/redoc",
+    "/openapi.json",
+})
+
+
 class TenantMiddleware(BaseHTTPMiddleware):
     """多租户解析中间件.
 
@@ -33,19 +42,23 @@ class TenantMiddleware(BaseHTTPMiddleware):
     - 可选: X-User-ID Header 记录当前用户
     """
 
-    EXEMPT_PATHS = {"/", "/api/v1/health", "/docs", "/redoc", "/openapi.json"}
+    EXEMPT_PATHS = _EXEMPT_PATHS
 
     def __init__(self, app: ASGIApp, required: bool = True):
         super().__init__(app)
         self.required = required
 
     async def dispatch(self, request: Request, call_next) -> Response:
-        if request.url.path in self.EXEMPT_PATHS:
+        path = request.url.path
+        if path in self.EXEMPT_PATHS or path.startswith("/assets/"):
             request.state.tenant_id = "anonymous"
             request.state.user_id = None
             return await call_next(request)
 
         tenant_id = request.headers.get("X-Tenant-ID", "").strip()
+        if not tenant_id:
+            # EventSource (SSE) 不支持自定义 header, 降级从 query param 读取
+            tenant_id = request.query_params.get("tenant_id", "").strip()
         if not tenant_id:
             if self.required:
                 return JSONResponse(
@@ -75,7 +88,7 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
     需要 TenantMiddleware 在前.
     """
 
-    EXEMPT_PATHS = {"/", "/api/v1/health", "/docs", "/redoc", "/openapi.json"}
+    EXEMPT_PATHS = _EXEMPT_PATHS
 
     def __init__(
         self,
@@ -88,7 +101,8 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
         self.limiter = limiter or InMemoryRateLimiter(limit=limit, window_seconds=window_seconds)
 
     async def dispatch(self, request: Request, call_next) -> Response:
-        if request.url.path in self.EXEMPT_PATHS:
+        path = request.url.path
+        if path in self.EXEMPT_PATHS or path.startswith("/assets/"):
             return await call_next(request)
 
         tenant_id = getattr(request.state, "tenant_id", None) or "anonymous"

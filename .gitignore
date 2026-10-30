@@ -41,3 +41,9 @@ data/cache/
 logs/
 *.log
 .qdrant_data/
+
+# 前端 (Phase 10)
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+*.local
